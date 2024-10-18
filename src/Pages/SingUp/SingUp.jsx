@@ -27,7 +27,7 @@ const SingUp = () => {
                             name: data.name,
                             email: data.email,
                         }
-                        axiosPublic.post('/users', userInfo)
+                        axiosPublic.post('/user', userInfo)
                             .then(res => {
                                 if (res.data.insertedId) {
                                     console.log('user added');

@@ -20,14 +20,14 @@ const queryClient = new QueryClient()
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <div className='container mx-auto'>
-      <QueryClientProvider  client={queryClient}>
-        <AuthProvider>
-          <HelmetProvider>
+      <HelmetProvider>
+        <QueryClientProvider client={queryClient}>
+          <AuthProvider>
             <RouterProvider router={router} />
             <Toaster />
-          </HelmetProvider>
-        </AuthProvider>
-      </QueryClientProvider>
+          </AuthProvider>
+        </QueryClientProvider>
+      </HelmetProvider>
     </div>
   </StrictMode>,
 )

@@ -1,7 +1,42 @@
 import { Link } from "react-router-dom";
+import useAuth from "../hook/useAuth";
+import { useState } from "react";
+import useAxiosSecure from "../hook/useAxiosSecure";
+import toast from "react-hot-toast";
 
 
 const Navbar = () => {
+    const { user, logOut } = useAuth()
+    const [isOpen, setIsOpen] = useState(false)
+
+    // for modal
+    const [isModalOpen, setIsModalOpen] = useState(false)
+    const closeModal = () => {
+        setIsModalOpen(false)
+    }
+    const modalHandler = async () => {
+        console.log('I want to be a host')
+        try {
+          const currentUser = {
+            email: user?.email,
+            role: 'guest',
+            status: 'Requested',
+          }
+          const { data } = await useAxiosSecure.put(`/user`, currentUser)
+          console.log(data)
+          if (data.modifiedCount > 0) {
+            toast.success('Success! Please wait for admin confirmation')
+          } else {
+            toast.success('Please!, Wait for admin approval👊')
+          }
+        } catch (err) {
+          console.log(err)
+          toast.error(err.message)
+        } finally {
+          closeModal()
+        }
+      }
+
     const links = <>
         <li><Link to='/'>Home</Link></li>
         <li><Link to='/login'>Login</Link></li>

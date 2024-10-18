@@ -21,7 +21,7 @@ const AddDoctor = () => {
     onSuccess: () => {
       console.log('Data Saved Successfully')
       toast.success('Doctor Added Successfully!')
-      // navigate('/dashboard/my-listings')
+      navigate('/')
       setLoading(false)
     },
   })
@@ -35,6 +35,7 @@ const AddDoctor = () => {
     const name = form.name.value
     const email = form.email.value
     const specialty = form.specialty.value
+    const description = form.description.value
     const image = form.image.files[0]
 
     try {
@@ -43,6 +44,7 @@ const AddDoctor = () => {
         name,
         email,
         specialty,
+        description,
         image: image_url,
       }
       console.table(doctorData)
@@ -150,6 +152,17 @@ const AddDoctor = () => {
 
           </div>
         </div>
+        <div className='space-y-1 text-sm'>
+              <label htmlFor='description' className='block text-gray-600'>
+                Description
+              </label>
+
+              <textarea
+                id='description'
+                className='block rounded-md focus:rose-300 w-full h-32 px-4 py-3 text-gray-800  border border-rose-300 focus:outline-rose-500 '
+                name='description'
+              ></textarea>
+            </div>
 
         <button
           type='submit'
